@@ -331,6 +331,16 @@ section {
     object-fit: cover;
 }
 
+/* Collection Images */
+.collection-image {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    object-fit: cover;
+}
+
 .video-placeholder {
     background: var(--primary-green);
     color: white;
@@ -932,7 +942,8 @@ footer {
         gap: 16px;
     }
 
-    .collection-video {
+    .collection-video,
+    .collection-image {
         max-width: 100%;
     }
 }
