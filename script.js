@@ -132,8 +132,10 @@ function initCounterAnimations() {
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
+            if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
                 animateCounter(entry.target);
+                entry.target.setAttribute('data-animated', 'true');
+                observer.unobserve(entry.target); // Stop observing after animation
             }
         });
     }, { threshold: 0.5 });
