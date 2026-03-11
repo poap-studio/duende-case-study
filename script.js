@@ -144,13 +144,18 @@ function initCounterAnimations() {
 }
 
 function animateCounter(element) {
-    const text = element.textContent;
-    const number = parseFloat(text.replace(/[^0-9.-]+/g, ''));
+    // Store original text if not already stored
+    if (!element.hasAttribute('data-original-text')) {
+        element.setAttribute('data-original-text', element.textContent);
+    }
+    
+    const originalText = element.getAttribute('data-original-text');
+    const number = parseFloat(originalText.replace(/[^0-9.-]+/g, ''));
     
     if (isNaN(number)) return;
     
-    // Better parsing for prefix and suffix
-    const match = text.match(/^([^0-9]*)([0-9.-]+)(.*)$/);
+    // Better parsing for prefix and suffix from original text
+    const match = originalText.match(/^([^0-9]*)([0-9.-]+)(.*)$/);
     if (!match) return;
     
     const prefix = match[1] || '';
@@ -173,7 +178,7 @@ function animateCounter(element) {
             displayValue = Math.floor(current).toLocaleString();
         } else if (number < 1) {
             displayValue = current.toFixed(1);
-        } else if (text.includes('.')) {
+        } else if (originalText.includes('.')) {
             // Handle decimal prices like $2.27
             displayValue = current.toFixed(2);
         } else {
