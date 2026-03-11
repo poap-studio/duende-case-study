@@ -147,8 +147,12 @@ function animateCounter(element) {
     
     if (isNaN(number)) return;
     
-    const suffix = text.replace(/[0-9.-]+/g, '');
-    const prefix = text.substring(0, text.indexOf(number.toString()));
+    // Better parsing for prefix and suffix
+    const match = text.match(/^([^0-9]*)([0-9.-]+)(.*)$/);
+    if (!match) return;
+    
+    const prefix = match[1] || '';
+    const suffix = match[3] || '';
     
     let current = 0;
     const increment = number / 50;
@@ -167,6 +171,9 @@ function animateCounter(element) {
             displayValue = Math.floor(current).toLocaleString();
         } else if (number < 1) {
             displayValue = current.toFixed(1);
+        } else if (text.includes('.')) {
+            // Handle decimal prices like $2.27
+            displayValue = current.toFixed(2);
         } else {
             displayValue = Math.floor(current);
         }
