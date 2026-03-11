@@ -185,6 +185,15 @@ section {
     text-align: center;
 }
 
+.duende-video {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 16px;
+    box-shadow: var(--shadow-hover);
+    object-fit: cover;
+}
+
 .duende-story h3 {
     font-size: 1.8rem;
     margin-bottom: 16px;
@@ -952,7 +961,8 @@ footer {
     }
 
     .collection-video,
-    .collection-image {
+    .collection-image,
+    .duende-video {
         max-width: 100%;
     }
 }
