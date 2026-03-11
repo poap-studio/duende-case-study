@@ -209,14 +209,17 @@ section {
 /* Timeline Steps */
 .timeline-steps {
     margin-bottom: 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
 }
 
 .timeline-step {
     background: white;
     border-radius: var(--border-radius);
-    margin-bottom: 32px;
     box-shadow: var(--shadow);
     overflow: hidden;
+    margin-bottom: 0;
 }
 
 .step-header {
@@ -251,16 +254,22 @@ section {
 }
 
 .step-content {
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 32px;
-    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+    text-align: center;
+}
+
+.step-details {
+    text-align: left;
 }
 
 .step-details > div {
-    margin-bottom: 16px;
-    padding: 12px 0;
+    margin-bottom: 12px;
+    padding: 8px 0;
     border-bottom: 1px solid var(--border-light);
+    font-size: 0.9rem;
 }
 
 .step-details > div:last-child {
@@ -342,7 +351,7 @@ section {
 /* Collection Videos */
 .collection-video {
     width: 100%;
-    max-width: 200px;
+    max-width: 150px;
     height: auto;
     border-radius: 8px;
     box-shadow: var(--shadow);
@@ -352,7 +361,7 @@ section {
 /* Collection Images */
 .collection-image {
     width: 100%;
-    max-width: 200px;
+    max-width: 150px;
     height: auto;
     border-radius: 8px;
     box-shadow: var(--shadow);
@@ -924,6 +933,19 @@ footer {
     align-items: center;
 }
 
+@media (max-width: 1024px) {
+    .timeline-steps {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+    
+    .timeline-step:last-child {
+        grid-column: span 2;
+        max-width: 50%;
+        margin: 0 auto;
+    }
+}
+
 @media (max-width: 768px) {
     .footer-content {
         flex-direction: column;
@@ -937,9 +959,18 @@ footer {
         text-align: center;
     }
 
-    .step-content {
+    .timeline-steps {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 24px;
+    }
+    
+    .timeline-step:last-child {
+        grid-column: span 1;
+        max-width: 100%;
+    }
+
+    .step-content {
+        gap: 16px;
         padding: 20px;
     }
 
