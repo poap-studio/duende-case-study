@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duende.ba Case Study - Multi-Touchpoint Instagram Campaign</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="logo">
+                    <span class="poap-logo">POAP Studio</span>
+                </div>
+                <h1 class="hero-title">From 370K Followers to 4,400 Qualified Leads</h1>
+                <p class="hero-subtitle">How we transformed passive Instagram consumption into active brand engagement with a 7-day narrative-driven campaign</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">2.1%</span>
+                        <span class="stat-label">Email Capture Rate</span>
+                        <span class="stat-comparison">vs 0.1-0.5% industry</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">$2.27</span>
+                        <span class="stat-label">Cost Per Email</span>
+                        <span class="stat-comparison">vs $3-8 industry</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">23x</span>
+                        <span class="stat-label">Share Amplification</span>
+                        <span class="stat-comparison">vs normal content</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenge Section -->
+    <section class="challenge">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Instagram Challenge</h2>
+                <p>370K Followers. 60K Average Story Views. 1.7% Comment Rate.</p>
+            </div>
+            
+            <div class="challenge-content">
+                <div class="problem-box">
+                    <h3>The Reality for Brands</h3>
+                    <ul>
+                        <li>Brands spend thousands on content creation</li>
+                        <li>Average engagement: 1-3%</li>
+                        <li>Email capture: 0.1-0.5%</li>
+                        <li><strong>Result:</strong> Passive consumption, zero retention</li>
+                    </ul>
+                </div>
+                
+                <div class="comparison-chart">
+                    <h3>Normal Content vs Campaign Performance</h3>
+                    <div class="chart-container">
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="challenge-question">
+                <h3>"How do you transform followers into qualified leads while amplifying organic reach?"</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution">
+        <div class="container">
+            <div class="section-header">
+                <h2>The Solution: Narrative-Driven Funnel</h2>
+                <p>From Passive Scrolling to Active Collecting</p>
+            </div>
+
+            <div class="story-intro">
+                <h3>🎭 THE STORY: Duende lost 3 reliquias over 7 days</h3>
+                <p>Each touchpoint required a different Instagram action to help the Duende find his missing items</p>
+            </div>
+
+            <div class="funnels-container">
+                <div class="funnel-card">
+                    <div class="funnel-header">
+                        <h4>TOUCHPOINT 1: STORY</h4>
+                        <span class="funnel-badge">Sombrero</span>
+                    </div>
+                    <div class="funnel-stats">
+                        <div class="funnel-step">
+                            <span class="step-number">141,624</span>
+                            <span class="step-label">Views</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="funnel-step">
+                            <span class="step-number">15,741</span>
+                            <span class="step-label">Interactions</span>
+                            <span class="step-rate">11.1%</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="funnel-step">
+                            <span class="step-number">2,940</span>
+                            <span class="step-label">Emails</span>
+                            <span class="step-rate">2.1%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="funnel-card">
+                    <div class="funnel-header">
+                        <h4>TOUCHPOINT 2: REEL</h4>
+                        <span class="funnel-badge">Sobre</span>
+                    </div>
+                    <div class="funnel-stats">
+                        <div class="funnel-step">
+                            <span class="step-number">150,000</span>
+                            <span class="step-label">Views</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="funnel-step">
+                            <span class="step-number">9,253</span>
+                            <span class="step-label">Comments</span>
+                            <span class="step-rate">6.2%</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="funnel-step">
+                            <span class="step-number">2,968</span>
+                            <span class="step-label">Emails</span>
+                            <span class="step-rate">2.0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="funnel-card">
+                    <div class="funnel-header">
+                        <h4>TOUCHPOINT 3: REEL</h4>
+                        <span class="funnel-badge">Botas</span>
+                    </div>
+                    <div class="funnel-stats">
+                        <div class="funnel-step">
+                            <span class="step-number">147,000</span>
+                            <span class="step-label">Views</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="funnel-step">
+                            <span class="step-number">2,164</span>
+                            <span class="step-label">Shares</span>
+                            <span class="step-rate">1.47%</span>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="funnel-step">
+                            <span class="step-number">1,008</span>
+                            <span class="step-label">Emails</span>
+                            <span class="step-rate">0.7%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="behavior-transformation">
+                <h3>🎯 Behavior Transformation</h3>
+                <div class="transformation-grid">
+                    <div class="before-after">
+                        <div class="before">
+                            <h4>Normal Content</h4>
+                            <div class="metric">
+                                <span class="number">0.9%</span>
+                                <span class="label">Share Rate</span>
+                            </div>
+                            <div class="metric">
+                                <span class="number">1.7%</span>
+                                <span class="label">Comment Rate</span>
+                            </div>
+                        </div>
+                        <div class="after">
+                            <h4>Campaign Content</h4>
+                            <div class="metric highlight">
+                                <span class="number">20.3%</span>
+                                <span class="label">Share Rate</span>
+                            </div>
+                            <div class="metric highlight">
+                                <span class="number">511%</span>
+                                <span class="label">Comment Rate</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result">
+                        <strong>Result:</strong> 23x amplification + viral organic reach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results">
+        <div class="container">
+            <div class="section-header">
+                <h2>Results That Matter</h2>
+                <p>4,400 Emails. $2.27 Cost Per Lead. World-Class Conversion.</p>
+            </div>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <h3>💰 Cost Efficiency</h3>
+                    <div class="cost-comparison">
+                        <div class="cost-item">
+                            <span class="cost-label">Campaign Investment</span>
+                            <span class="cost-value">$10,000</span>
+                        </div>
+                        <div class="cost-item highlight">
+                            <span class="cost-label">Cost Per Email</span>
+                            <span class="cost-value">$2.27</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Industry Standard</span>
+                            <span class="cost-value">$3-8</span>
+                        </div>
+                    </div>
+                    <p class="savings">25-70% cheaper than industry average</p>
+                </div>
+
+                <div class="result-card">
+                    <h3>📊 Performance vs Industry</h3>
+                    <div class="performance-metrics">
+                        <div class="performance-item">
+                            <span class="metric-name">Email Capture Rate</span>
+                            <div class="metric-comparison">
+                                <span class="our-rate">2.1%</span>
+                                <span class="vs">vs</span>
+                                <span class="industry-rate">0.1-0.5%</span>
+                            </div>
+                            <span class="improvement">4-20x better</span>
+                        </div>
+                        <div class="performance-item">
+                            <span class="metric-name">Engagement Rate</span>
+                            <div class="metric-comparison">
+                                <span class="our-rate">11.1%</span>
+                                <span class="vs">vs</span>
+                                <span class="industry-rate">1-3%</span>
+                            </div>
+                            <span class="improvement">+370%</span>
+                        </div>
+                        <div class="performance-item">
+                            <span class="metric-name">Organic Reach Lift</span>
+                            <div class="metric-comparison">
+                                <span class="our-rate">+117%</span>
+                                <span class="vs">vs</span>
+                                <span class="industry-rate">0-10%</span>
+                            </div>
+                            <span class="improvement">Best in class</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-card">
+                    <h3>💎 Lead Quality Segmentation</h3>
+                    <div class="quality-tiers">
+                        <div class="tier">
+                            <div class="tier-header">
+                                <span class="tier-name">Tier 1 (1 action)</span>
+                                <span class="tier-percentage">58.1%</span>
+                            </div>
+                            <span class="tier-count">2,556 emails</span>
+                        </div>
+                        <div class="tier">
+                            <div class="tier-header">
+                                <span class="tier-name">Tier 2 (2 actions)</span>
+                                <span class="tier-percentage">26.6%</span>
+                            </div>
+                            <span class="tier-count">1,172 emails</span>
+                        </div>
+                        <div class="tier highlight">
+                            <div class="tier-header">
+                                <span class="tier-name">Tier 3 (3 actions)</span>
+                                <span class="tier-percentage">15.3%</span>
+                            </div>
+                            <span class="tier-count">672 emails</span>
+                        </div>
+                    </div>
+                    <p class="multi-touch">41.9% multi-touch rate vs 5-10% industry</p>
+                </div>
+            </div>
+
+            <div class="bottom-line">
+                <h3>🚀 The Bottom Line</h3>
+                <p class="bottom-line-text">"Transform passive followers → qualified leads → brand advocates"</p>
+                <div class="bottom-line-points">
+                    <div class="point">✓ 7 days sustained engagement</div>
+                    <div class="point">✓ 672 pre-qualified super-fans identified</div>
+                    <div class="point">✓ Organic amplification included</div>
+                    <div class="point">✓ Cost-efficient vs Facebook/Google Ads</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Instagram Strategy?</h2>
+                <p>What would 672 qualified leads cost you on Facebook?</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn-primary">Get Case Study Details</a>
+                    <a href="#" class="btn-secondary">Book Strategy Call</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span>POAP Studio</span>
+                </div>
+                <div class="footer-links">
+                    <a href="https://poap.studio">poap.studio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
