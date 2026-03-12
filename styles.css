@@ -572,7 +572,49 @@ section {
     opacity: 0.7;
 }
 
-/* Removed funnel-separator styles since cards are now horizontal */
+/* KPI Section */
+.kpi-section {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 2px solid var(--border-light);
+}
+
+.kpi-section h5 {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.kpi-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+.kpi-item {
+    text-align: center;
+    min-width: 80px;
+    flex: 1;
+}
+
+.kpi-value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-green);
+    margin-bottom: 4px;
+}
+
+.kpi-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 500;
+    line-height: 1.2;
+}
 
 .behavior-transformation {
     background: var(--bg-light);
@@ -1062,6 +1104,19 @@ footer {
     
     .arrow-down {
         font-size: 1.3rem;
+    }
+    
+    .kpi-section {
+        margin-top: 24px;
+        padding-top: 20px;
+    }
+    
+    .kpi-grid {
+        gap: 12px;
+    }
+    
+    .kpi-item {
+        min-width: 70px;
     }
 }
 
