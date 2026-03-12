@@ -681,26 +681,34 @@
     @media (max-width: 768px) {
       /* navigation removed */
       .hero { padding: 0 24px; }
-      .hero-headline { font-size: 27px; }
+      .hero-headline { font-size: 35px; }
       .hero-stats { grid-template-columns: 1fr; gap: 20px; }
+      .stat { padding: 12px; border-radius: 8px; }
+      .stat-number { font-size: 1.25rem; margin-bottom: 4px; }
+      .stat-label { font-size: 0.55rem; margin-bottom: 2px; }
+      .stat-comparison { font-size: 0.45rem; }
+      .duende-intro { grid-template-columns: 1fr !important; gap: 30px !important; text-align: center; }
+      .duende-image { max-width: 300px; margin: 0 auto; }
+      .duende-story h3 { font-size: 28px !important; }
+      .duende-story p { font-size: 14px !important; }
       .story-carousel-fullwidth { margin: 24px 0 16px 0; }
       @keyframes slideInfinite {
         from {
           transform: translateX(0);
         }
         to {
-          transform: translateX(-1548px); /* Mobile: (9 * 160px) + (8 * 12px gaps) */
+          transform: translateX(-1968px); /* Mobile: (9 * 208px) + (8 * 12px gaps) = 1872 + 96 = 1968 */
         }
       }
       .carousel-item {
-        width: 160px;
-        height: 320px;
+        width: 208px;
+        height: 416px;
       }
       .carousel-track { gap: 12px; }
       .section { padding: 80px 24px; }
       .psychology-grid { grid-template-columns: 1fr; gap: 16px; }
       .psychology-card { padding: 24px 20px; }
-      .timeline-steps { grid-template-columns: 1fr; }
+      .timeline-steps { grid-template-columns: 1fr; width: 90%; max-width: none; }
       .section-header { flex-direction: column; gap: 24px; }
       .section-subtitle { text-align: left; }
       .cursor-dot { display: none; }
