@@ -470,24 +470,42 @@ section {
 
 .psychology-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+@media (min-width: 1024px) {
+    .psychology-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
 }
 
 .psychology-card {
     background: white;
     border-radius: var(--border-radius);
-    padding: 24px;
+    padding: 20px;
     box-shadow: var(--shadow);
     border-left: 4px solid var(--primary-green);
 }
 
+@media (min-width: 1024px) {
+    .psychology-card {
+        padding: 18px;
+    }
+}
+
 .psychology-card h4 {
     color: var(--dark-green);
-    margin-bottom: 12px;
-    font-size: 1.1rem;
+    margin-bottom: 10px;
+    font-size: 1rem;
     font-weight: 600;
     line-height: 1.3;
+}
+
+.psychology-card p {
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
 /* Image Placeholders */
@@ -1139,6 +1157,10 @@ footer {
     .psychology-grid {
         grid-template-columns: 1fr;
         gap: 16px;
+    }
+    
+    .psychology-card {
+        padding: 20px;
     }
 
     .collection-video,
