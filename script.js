@@ -1,7 +1,6 @@
 // DOM loaded event
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize comparison chart
-    initComparisonChart();
+    // Comparison chart removed
     
     // Initialize scroll animations
     initScrollAnimations();
@@ -10,99 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScrolling();
 });
 
-// Comparison Chart
-function initComparisonChart() {
-    const ctx = document.getElementById('comparisonChart');
-    if (!ctx) return;
-    
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Normal Post\n(46K likes)', 'Campaign Story\n(141K views)', 'Campaign Reel\n(9K comments)', 'Campaign Shares\n(2.1K shares)'],
-            datasets: [{
-                label: 'Engagement Rate (%)',
-                data: [1.7, 11.1, 511, 20.3],
-                backgroundColor: [
-                    'rgba(108, 117, 125, 0.8)',
-                    'rgba(22, 160, 133, 0.8)',
-                    'rgba(243, 156, 18, 0.8)',
-                    'rgba(22, 160, 133, 0.9)'
-                ],
-                borderColor: [
-                    'rgba(108, 117, 125, 1)',
-                    'rgba(22, 160, 133, 1)',
-                    'rgba(243, 156, 18, 1)',
-                    'rgba(22, 160, 133, 1)'
-                ],
-                borderWidth: 2,
-                borderRadius: 8,
-                borderSkipped: false,
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    backgroundColor: 'rgba(44, 62, 80, 0.9)',
-                    titleColor: '#fff',
-                    bodyColor: '#fff',
-                    borderColor: 'rgba(22, 160, 133, 0.8)',
-                    borderWidth: 1,
-                    callbacks: {
-                        label: function(context) {
-                            let label = context.parsed.y;
-                            if (context.dataIndex === 2) {
-                                return `Comment Rate: ${label}% (vs 1.7% normal)`;
-                            } else if (context.dataIndex === 3) {
-                                return `Share Rate: ${label}% (vs 0.9% normal)`;
-                            } else {
-                                return `Engagement Rate: ${label}%`;
-                            }
-                        }
-                    }
-                }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: 'rgba(0,0,0,0.1)',
-                    },
-                    ticks: {
-                        callback: function(value) {
-                            return value + '%';
-                        },
-                        color: '#666',
-                        font: {
-                            family: 'Inter'
-                        }
-                    }
-                },
-                x: {
-                    grid: {
-                        display: false
-                    },
-                    ticks: {
-                        color: '#666',
-                        font: {
-                            family: 'Inter',
-                            size: 11
-                        },
-                        maxRotation: 0
-                    }
-                }
-            },
-            animation: {
-                duration: 2000,
-                easing: 'easeOutQuart'
-            }
-        }
-    });
-}
 
 // Scroll Animations
 function initScrollAnimations() {
@@ -118,7 +24,7 @@ function initScrollAnimations() {
     });
 
     // Observe all cards and sections (removed .stat to prevent number animation)
-    document.querySelectorAll('.funnel-card, .result-card, .problem-box, .comparison-chart').forEach(el => {
+    document.querySelectorAll('.funnel-card, .result-card').forEach(el => {
         observer.observe(el);
     });
 }
@@ -144,14 +50,14 @@ function initSmoothScrolling() {
 // Add CSS classes for animations
 const style = document.createElement('style');
 style.textContent = `
-    .funnel-card, .result-card, .problem-box, .comparison-chart {
+    .funnel-card, .result-card {
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.6s ease;
     }
     
     .funnel-card.animate-in, .result-card.animate-in, 
-    .problem-box.animate-in, .comparison-chart.animate-in {
+    {
         opacity: 1;
         transform: translateY(0);
     }
