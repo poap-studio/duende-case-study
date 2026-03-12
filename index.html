@@ -243,7 +243,7 @@
       position: relative;
       overflow-x: clip;
       gap: 0;
-      background: linear-gradient(135deg, var(--primary-accent) 0%, var(--dark-accent) 100%);
+      background: var(--black);
     }
 
     /* Giant sliding text */
@@ -358,7 +358,7 @@
 
     @keyframes slideInfinite {
       from {
-        transform: translateX(0);
+        transform: translateX(100vw);
       }
       to {
         transform: translateX(-1928px); /* 9 items: (9 * 200px) + (8 * 20px gaps) */
@@ -686,7 +686,7 @@
       .story-carousel-fullwidth { margin: 24px 0 16px 0; }
       @keyframes slideInfinite {
         from {
-          transform: translateX(0);
+          transform: translateX(100vw);
         }
         to {
           transform: translateX(-1548px); /* Mobile: (9 * 160px) + (8 * 12px gaps) */
