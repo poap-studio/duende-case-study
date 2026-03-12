@@ -253,6 +253,14 @@ h4 { font-size: 1.2rem; font-weight: 500; }
     margin-bottom: 4px;
 }
 
+.stat-subtitle {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
 .stat-comparison {
     display: block;
     font-size: 0.9rem;
