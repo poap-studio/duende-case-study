@@ -183,7 +183,7 @@ h4 { font-size: 1.2rem; font-weight: 500; }
         transform: translateX(0);
     }
     to {
-        transform: translateX(calc(-100% - 16px));
+        transform: translateX(-1928px); /* 9 items: (9 * 200px) + (8 * 16px gaps) */
     }
 }
 
@@ -200,6 +200,15 @@ h4 { font-size: 1.2rem; font-weight: 500; }
     
     .story-carousel {
         margin: 32px 0;
+    }
+    
+    @keyframes slideInfinite {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(-1548px); /* Mobile: (9 * 160px) + (8 * 12px gaps) */
+        }
     }
 }
 
