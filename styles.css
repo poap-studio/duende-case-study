@@ -67,9 +67,14 @@ h4 { font-size: 1.2rem; font-weight: 500; }
 .hero {
     background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
     color: var(--text-white);
-    padding: 80px 0;
+    padding: 80px 0 40px 0;
     text-align: center;
     position: relative;
+}
+
+.hero .container:last-child {
+    padding-top: 40px;
+    padding-bottom: 40px;
 }
 
 .hero::before {
@@ -127,30 +132,19 @@ h4 { font-size: 1.2rem; font-weight: 500; }
     margin-right: auto;
 }
 
-/* Story Carousel */
-.story-carousel {
+/* Story Carousel - Full Width */
+.story-carousel-fullwidth {
     margin: 48px 0;
     overflow: hidden;
     position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
 }
 
 .carousel-container {
     width: 100%;
     overflow: hidden;
-    mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 10%,
-        black 90%,
-        transparent 100%
-    );
-    -webkit-mask-image: linear-gradient(
-        to right,
-        transparent 0%,
-        black 10%,
-        black 90%,
-        transparent 100%
-    );
+    /* Removed blur mask for clean edges */
 }
 
 .carousel-track {
@@ -198,7 +192,7 @@ h4 { font-size: 1.2rem; font-weight: 500; }
         gap: 12px;
     }
     
-    .story-carousel {
+    .story-carousel-fullwidth {
         margin: 32px 0;
     }
     
