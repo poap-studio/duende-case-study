@@ -616,6 +616,20 @@ section {
     line-height: 1.2;
 }
 
+.email-breakdown {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-light);
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.email-breakdown strong {
+    color: var(--dark-green);
+    font-weight: 600;
+}
+
 .behavior-transformation {
     background: var(--bg-light);
     padding: 48px;
@@ -1115,6 +1129,12 @@ footer {
     .step-label, .step-rate {
         font-size: 0.8rem;
     }
+    
+    .email-breakdown {
+        margin-top: 10px;
+        padding-top: 6px;
+        font-size: 0.75rem;
+    }
 }
 
 @media (max-width: 360px) {
@@ -1144,5 +1164,11 @@ footer {
     
     .step-label, .step-rate {
         font-size: 0.75rem;
+    }
+    
+    .email-breakdown {
+        margin-top: 8px;
+        padding-top: 4px;
+        font-size: 0.7rem;
     }
 }
