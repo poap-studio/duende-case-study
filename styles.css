@@ -488,15 +488,11 @@ section {
     border-radius: var(--border-radius);
     padding: 24px;
     box-shadow: var(--shadow);
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
 
-.funnel-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-hover);
-}
+/* Hover effects removed for static display */
 
 .funnel-card::before {
     content: '';
@@ -1044,27 +1040,7 @@ footer {
     opacity: 1;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.funnel-card, .result-card {
-    animation: fadeInUp 0.6s ease forwards;
-}
-
-.funnel-card:nth-child(2) { animation-delay: 0.1s; }
-.funnel-card:nth-child(3) { animation-delay: 0.2s; }
-
-.result-card:nth-child(2) { animation-delay: 0.1s; }
-.result-card:nth-child(3) { animation-delay: 0.2s; }
+/* Animations removed - static display only */
 
 /* Responsive utilities */
 @media (max-width: 480px) {

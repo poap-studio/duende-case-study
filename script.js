@@ -1,33 +1,12 @@
 // DOM loaded event
 document.addEventListener('DOMContentLoaded', function() {
-    // Comparison chart removed
-    
-    // Initialize scroll animations
-    initScrollAnimations();
+    // All animations removed - static page only
     
     // Smooth scrolling for anchor links
     initSmoothScrolling();
 });
 
-
-// Scroll Animations
-function initScrollAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    // Observe all cards and sections (removed .stat to prevent number animation)
-    document.querySelectorAll('.funnel-card, .result-card').forEach(el => {
-        observer.observe(el);
-    });
-}
+// All scroll animations removed
 
 // Counter animations removed - static numbers only
 
