@@ -535,26 +535,30 @@ section {
 .funnel-step {
     text-align: center;
     flex: 1;
-    min-width: 80px;
+    min-width: 120px;
+}
+
+.step-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
 }
 
 .step-number {
-    display: block;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--primary-green);
-    margin-bottom: 4px;
 }
 
 .step-label {
-    display: block;
     font-size: 0.9rem;
     color: var(--text-light);
-    margin-bottom: 4px;
+    font-weight: 500;
 }
 
 .step-rate {
-    display: block;
     font-size: 0.8rem;
     font-weight: 600;
     color: var(--accent-orange);
@@ -1099,6 +1103,18 @@ footer {
     .kpi-item {
         min-width: 70px;
     }
+    
+    .step-text {
+        gap: 4px;
+    }
+    
+    .step-number {
+        font-size: 1.2rem;
+    }
+    
+    .step-label, .step-rate {
+        font-size: 0.8rem;
+    }
 }
 
 @media (max-width: 360px) {
@@ -1115,5 +1131,18 @@ footer {
     
     .funnel-card {
         padding: 20px;
+    }
+    
+    .step-text {
+        flex-direction: column;
+        gap: 2px;
+    }
+    
+    .step-number {
+        font-size: 1.1rem;
+    }
+    
+    .step-label, .step-rate {
+        font-size: 0.75rem;
     }
 }
