@@ -883,6 +883,15 @@ section {
     margin-bottom: 8px;
 }
 
+.metric-subtitle {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 6px;
+}
+
 .metric-comparison {
     display: flex;
     align-items: center;
