@@ -135,6 +135,8 @@ h4 { font-size: 1.2rem; font-weight: 500; }
     border-radius: var(--border-radius);
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .stat-number {
@@ -1056,7 +1058,7 @@ footer {
     }
 }
 
-.funnel-card, .result-card, .stat {
+.funnel-card, .result-card {
     animation: fadeInUp 0.6s ease forwards;
 }
 

@@ -6,9 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize scroll animations
     initScrollAnimations();
     
-    // Initialize counter animations
-    initCounterAnimations();
-    
     // Smooth scrolling for anchor links
     initSmoothScrolling();
 });
@@ -120,74 +117,13 @@ function initScrollAnimations() {
         rootMargin: '0px 0px -50px 0px'
     });
 
-    // Observe all cards and sections
-    document.querySelectorAll('.funnel-card, .result-card, .stat, .problem-box, .comparison-chart').forEach(el => {
+    // Observe all cards and sections (removed .stat to prevent number animation)
+    document.querySelectorAll('.funnel-card, .result-card, .problem-box, .comparison-chart').forEach(el => {
         observer.observe(el);
     });
 }
 
-// Counter Animations
-function initCounterAnimations() {
-    const counters = document.querySelectorAll('.stat-number, .step-number, .cost-value, .our-rate, .tier-percentage');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
-                animateCounter(entry.target);
-                entry.target.setAttribute('data-animated', 'true');
-                observer.unobserve(entry.target); // Stop observing after animation
-            }
-        });
-    }, { threshold: 0.5 });
-
-    counters.forEach(counter => observer.observe(counter));
-}
-
-function animateCounter(element) {
-    // Store original text if not already stored
-    if (!element.hasAttribute('data-original-text')) {
-        element.setAttribute('data-original-text', element.textContent);
-    }
-    
-    const originalText = element.getAttribute('data-original-text');
-    const number = parseFloat(originalText.replace(/[^0-9.-]+/g, ''));
-    
-    if (isNaN(number)) return;
-    
-    // Better parsing for prefix and suffix from original text
-    const match = originalText.match(/^([^0-9]*)([0-9.-]+)(.*)$/);
-    if (!match) return;
-    
-    const prefix = match[1] || '';
-    const suffix = match[3] || '';
-    
-    let current = 0;
-    const increment = number / 50;
-    const duration = 1500;
-    const stepTime = duration / 50;
-    
-    const timer = setInterval(() => {
-        current += increment;
-        if (current >= number) {
-            current = number;
-            clearInterval(timer);
-        }
-        
-        let displayValue;
-        if (number >= 1000) {
-            displayValue = Math.floor(current).toLocaleString();
-        } else if (number < 1) {
-            displayValue = current.toFixed(1);
-        } else if (originalText.includes('.')) {
-            // Handle decimal prices like $2.27
-            displayValue = current.toFixed(2);
-        } else {
-            displayValue = Math.floor(current);
-        }
-        
-        element.textContent = prefix + displayValue + suffix;
-    }, stepTime);
-}
+// Counter animations removed - static numbers only
 
 // Smooth Scrolling
 function initSmoothScrolling() {
