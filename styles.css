@@ -913,7 +913,7 @@ section {
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
-    transition: all 0.3s ease;
+    /* transition removed */
 }
 
 .btn-primary {
@@ -1037,7 +1037,7 @@ footer {
     color: var(--text-white);
     text-decoration: none;
     opacity: 0.8;
-    transition: opacity 0.3s ease;
+    /* transition removed */
 }
 
 .footer-links a:hover {
