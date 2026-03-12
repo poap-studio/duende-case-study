@@ -325,6 +325,15 @@ section {
     object-fit: cover;
 }
 
+.feature-image-img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    object-fit: cover;
+}
+
 /* Campaign Psychology */
 .campaign-psychology h3 {
     text-align: center;
@@ -1013,7 +1022,8 @@ footer {
     .collection-video,
     .collection-image,
     .duende-video,
-    .feature-video {
+    .feature-video,
+    .feature-image-img {
         max-width: 100%;
     }
 }
