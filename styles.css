@@ -127,6 +127,82 @@ h4 { font-size: 1.2rem; font-weight: 500; }
     margin-right: auto;
 }
 
+/* Story Carousel */
+.story-carousel {
+    margin: 48px 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        black 10%,
+        black 90%,
+        transparent 100%
+    );
+}
+
+.carousel-track {
+    display: flex;
+    gap: 16px;
+    animation: slideInfinite 30s linear infinite;
+    width: fit-content;
+}
+
+.carousel-item {
+    flex-shrink: 0;
+    width: 200px;
+    height: 356px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.story-image,
+.story-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+@keyframes slideInfinite {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(calc(-100% - 16px));
+    }
+}
+
+/* Responsive carousel */
+@media (max-width: 768px) {
+    .carousel-item {
+        width: 160px;
+        height: 284px;
+    }
+    
+    .carousel-track {
+        gap: 12px;
+    }
+    
+    .story-carousel {
+        margin: 32px 0;
+    }
+}
+
 .hero-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
