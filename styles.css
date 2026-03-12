@@ -238,6 +238,14 @@ h4 { font-size: 1.2rem; font-weight: 500; }
     margin-bottom: 8px;
 }
 
+.stat-number small {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    display: block;
+    margin-bottom: 2px;
+}
+
 .stat-label {
     display: block;
     font-size: 1.1rem;
