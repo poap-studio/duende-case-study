@@ -764,6 +764,44 @@
       .cursor-dot { display: none; }
       .hero-giant-text { font-size: 100px; }
     }
+    
+    /* Collection cards */
+    .collection-card {
+      background: var(--gray-900);
+      border-radius: 16px;
+      padding: 32px;
+      border: 1px solid var(--gray-800);
+      transition: all 0.5s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .collection-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary-green);
+    }
+
+    .collection-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--primary-green);
+      transition: width 0.6s var(--ease-out-expo);
+    }
+
+    .collection-card:hover::before {
+      width: 100%;
+    }
+
+    /* Collection page grid responsive */
+    @media (max-width: 768px) {
+      .collection-page-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -975,23 +1013,39 @@
       <p class="section-subtitle reveal delay-2">Each participant received a unique link to track their progress and showcase their collectibles</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
-      <div class="reveal-left delay-3">
-        <div style="background: var(--gray-900); border-radius: 16px; padding: 40px; border: 1px solid var(--gray-800);">
-          <h4 style="font-family: var(--font-heading); font-size: 24px; font-weight: 500; margin-bottom: 20px; color: var(--primary-green);">Visual progress</h4>
-          <p style="color: var(--gray-300); line-height: 1.7; margin-bottom: 24px;">Users could see their collection grow in real-time, with each new item appearing as soon as they completed the required action.</p>
-          <div style="display: flex; gap: 16px;">
-            <img src="collectible-display.png" alt="Collection Display" style="width: 100%; border-radius: 12px;">
-          </div>
+    <div class="collection-page-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;">
+      <div class="collection-card reveal delay-3">
+        <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden;">
+          <img src="dm-access.png" alt="Instagram DM Access" style="width: 100%; aspect-ratio: 16/10; object-fit: cover;">
         </div>
+        <h4 style="font-family: var(--font-heading); font-size: 20px; font-weight: 500; margin-bottom: 12px; color: var(--primary-green);">Access to Personal Collection Page from DMs</h4>
+        <p style="color: var(--gray-300); line-height: 1.7; font-size: 14px;">Direct link delivered via Instagram DM after each successful action</p>
       </div>
 
-      <div class="reveal-right delay-4">
-        <div style="background: var(--gray-900); border-radius: 16px; padding: 40px; border: 1px solid var(--gray-800);">
-          <h4 style="font-family: var(--font-heading); font-size: 24px; font-weight: 500; margin-bottom: 20px; color: var(--primary-green);">Completion rewards and leaderboard</h4>
-          <p style="color: var(--gray-300); line-height: 1.7; margin-bottom: 24px;">Completing all three items unlocked exclusive rewards and recognition on the community leaderboard.</p>
-          <img src="rewards-leaderboard.png" alt="Rewards and Leaderboard" style="width: 100%; border-radius: 12px;">
+      <div class="collection-card reveal delay-4">
+        <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden;">
+          <img src="collectible-display.png" alt="Collection Display" style="width: 100%; aspect-ratio: 16/10; object-fit: cover;">
         </div>
+        <h4 style="font-family: var(--font-heading); font-size: 20px; font-weight: 500; margin-bottom: 12px; color: var(--primary-green);">See the Collectible You Got</h4>
+        <p style="color: var(--gray-300); line-height: 1.7; font-size: 14px;">Visual display of your collected items with rarity and completion status</p>
+      </div>
+
+      <div class="collection-card reveal delay-5">
+        <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden;">
+          <video autoplay muted loop playsinline style="width: 100%; aspect-ratio: 16/10; object-fit: cover;">
+            <source src="duende-character.mp4" type="video/mp4">
+          </video>
+        </div>
+        <h4 style="font-family: var(--font-heading); font-size: 20px; font-weight: 500; margin-bottom: 12px; color: var(--primary-green);">Visual progress</h4>
+        <p style="color: var(--gray-300); line-height: 1.7; font-size: 14px;">See YOUR duende character dress up as you collect items</p>
+      </div>
+
+      <div class="collection-card reveal delay-6">
+        <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden;">
+          <img src="rewards-leaderboard.png" alt="Rewards and Leaderboard" style="width: 100%; aspect-ratio: 16/10; object-fit: cover;">
+        </div>
+        <h4 style="font-family: var(--font-heading); font-size: 20px; font-weight: 500; margin-bottom: 12px; color: var(--primary-green);">Completion rewards and leaderboard</h4>
+        <p style="color: var(--gray-300); line-height: 1.7; font-size: 14px;">Track your progress against other collectors and see available rewards</p>
       </div>
     </div>
   </section>
@@ -1170,7 +1224,7 @@
     animateCursor();
 
     // Hover effect on interactive elements
-    const hoverTargets = document.querySelectorAll('a, button, .psychology-card, .result-card, .timeline-step');
+    const hoverTargets = document.querySelectorAll('a, button, .psychology-card, .result-card, .timeline-step, .collection-card');
     hoverTargets.forEach(el => {
       el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
       el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
