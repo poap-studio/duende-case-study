@@ -1125,22 +1125,7 @@ footer {
     font-size: 1rem;
 }
 
-.touchpoint-badge {
-    padding: 2px 8px;
-    border-radius: 6px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: white;
-}
-
-.touchpoint-badge.new {
-    background: #8B5CF6;
-}
-
-.touchpoint-badge.pro {
-    background: #3B82F6;
-}
+/* Badge styles removed since no longer used */
 
 .touchpoint-description {
     color: var(--text-light);
