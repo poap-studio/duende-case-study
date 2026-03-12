@@ -336,6 +336,7 @@
       gap: 20px;
       animation: slideInfinite 30s linear infinite;
       width: fit-content;
+      padding-right: 100px;
     }
 
     .carousel-item {
@@ -358,7 +359,7 @@
 
     @keyframes slideInfinite {
       from {
-        transform: translateX(100vw);
+        transform: translateX(0);
       }
       to {
         transform: translateX(-1928px); /* 9 items: (9 * 200px) + (8 * 20px gaps) */
@@ -686,7 +687,7 @@
       .story-carousel-fullwidth { margin: 24px 0 16px 0; }
       @keyframes slideInfinite {
         from {
-          transform: translateX(100vw);
+          transform: translateX(0);
         }
         to {
           transform: translateX(-1548px); /* Mobile: (9 * 160px) + (8 * 12px gaps) */
