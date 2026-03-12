@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duende.ba Case Study — Instagram Gamified Campaign by POAP Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       CSS VARIABLES & RESET
+    ======================================== */
+    :root {
+      --black: #171717;
+      --white: #FCFCFC;
+      --gray-100: #F5F5F5;
+      --gray-200: #E8E8E8;
+      --gray-300: #D4D4D4;
+      --gray-400: #A8A8A8;
+      --gray-500: #9A9A9A;
+      --gray-600: #878787;
+      --gray-700: #404040;
+      --gray-800: #262626;
+      --gray-900: #1A1A1A;
+      /* POAP Studio brand colors */
+      --primary-green: #16a085;
+      --dark-green: #2c3e50;
+      --light-green: #48c9b0;
+      --accent-orange: #f39c12;
+      --font-heading: 'Sora', sans-serif;
+      --font-body: 'Manrope', sans-serif;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+      --ease-smooth: cubic-bezier(0.33, 1, 0.68, 1);
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img { display: block; max-width: 100%; }
+    ul { list-style: none; }
+
+    ::selection {
+      background: var(--white);
+      color: var(--black);
+    }
+
+    /* ========================================
+       CUSTOM CURSOR DOT
+    ======================================== */
+    .cursor-dot {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 8px;
+      height: 8px;
+      background: var(--white);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      mix-blend-mode: difference;
+      transition: transform 0.15s var(--ease-out-expo);
+    }
+
+    .cursor-dot.hovering {
+      transform: scale(5);
+    }
+
+    /* ========================================
+       GRAIN OVERLAY
+    ======================================== */
+    .grain {
+      position: fixed;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* ========================================
+       NAVIGATION — Floating Pill
+    ======================================== */
+    nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(23, 23, 23, 0.6);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 100px;
+      transition: top 0.5s var(--ease-smooth), background 0.5s var(--ease-smooth);
+    }
+
+    nav:hover {
+      background: rgba(23, 23, 23, 0.75);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      margin-right: 12px;
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent-orange);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 0 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--gray-400);
+      position: relative;
+      padding: 8px 16px;
+      border-radius: 100px;
+      transition: color 0.4s var(--ease-smooth), background 0.4s var(--ease-smooth);
+    }
+
+    .nav-links a:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* ========================================
+       REVEAL ANIMATIONS
+    ======================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 1.2s var(--ease-smooth), transform 1.2s var(--ease-smooth);
+      will-change: transform, opacity;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.96);
+      transition: opacity 1.2s var(--ease-smooth), transform 1.2s var(--ease-smooth);
+      will-change: transform, opacity;
+    }
+
+    .reveal-scale.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-60px);
+      transition: opacity 1.2s var(--ease-smooth), transform 1.2s var(--ease-smooth);
+      will-change: transform, opacity;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(60px);
+      transition: opacity 1.2s var(--ease-smooth), transform 1.2s var(--ease-smooth);
+      will-change: transform, opacity;
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Clip-path text reveal (Future Label style) */
+    .reveal-clip {
+      clip-path: inset(0 0 100% 0);
+      transition: clip-path 1.2s var(--ease-out-expo);
+      will-change: clip-path;
+    }
+
+    .reveal-clip.visible {
+      clip-path: inset(0 0 0% 0);
+    }
+
+    /* Word-by-word stagger reveal */
+    .reveal-words span {
+      display: inline-block;
+      overflow: hidden;
+    }
+
+    .reveal-words span span {
+      display: inline-block;
+      transform: translateY(110%);
+      transition: transform 0.9s var(--ease-out-expo);
+      will-change: transform;
+    }
+
+    .reveal-words.visible span span {
+      transform: translateY(0);
+    }
+
+    .reveal-line {
+      display: inline-block;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .reveal-line span {
+      display: inline-block;
+      transform: translateY(115%);
+      transition: transform 1s var(--ease-out-expo);
+      will-change: transform;
+    }
+
+    .reveal-line.visible span {
+      transform: translateY(0);
+    }
+
+    /* Stagger delays — deliberate, unhurried */
+    .delay-1 { transition-delay: 0.12s !important; }
+    .delay-2 { transition-delay: 0.24s !important; }
+    .delay-3 { transition-delay: 0.36s !important; }
+    .delay-4 { transition-delay: 0.48s !important; }
+    .delay-5 { transition-delay: 0.60s !important; }
+    .delay-6 { transition-delay: 0.72s !important; }
+    .delay-7 { transition-delay: 0.84s !important; }
+    .delay-8 { transition-delay: 0.96s !important; }
+
+    /* ========================================
+       HORIZONTAL RULE
+    ======================================== */
+    .divider {
+      width: 0%;
+      height: 1px;
+      background: var(--gray-800);
+      border: none;
+      margin: 0 auto;
+      transition: width 1.4s var(--ease-smooth);
+    }
+
+    .divider.visible {
+      width: 100%;
+    }
+
+    /* ========================================
+       SECTION: HERO
+    ======================================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 48px;
+      position: relative;
+      overflow-x: clip;
+      gap: 0;
+      background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+    }
+
+    /* Giant sliding text */
+    .hero-giant {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .hero-giant-text {
+      font-family: var(--font-heading);
+      font-size: clamp(120px, 18vw, 280px);
+      font-weight: 600;
+      letter-spacing: -0.05em;
+      line-height: 0.85;
+      color: var(--white);
+      white-space: nowrap;
+      opacity: 0.05;
+      animation: heroSlide 20s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    @keyframes heroSlide {
+      0% { transform: translateX(5%); }
+      100% { transform: translateX(-40%); }
+    }
+
+    /* Tag — small centered label */
+    .hero-tag {
+      position: relative;
+      z-index: 2;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-orange);
+      margin-bottom: clamp(28px, 4vh, 56px);
+    }
+
+    /* Headline — dominant, centered */
+    .hero-headline {
+      position: relative;
+      z-index: 2;
+      font-family: var(--font-heading);
+      font-size: clamp(40px, 6.2vw, 96px);
+      font-weight: 300;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      color: var(--white);
+      text-align: center;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* ========================================
+       STORY CAROUSEL - Full Width
+    ======================================== */
+    .story-carousel-fullwidth {
+      margin: 48px 0 24px 0;
+      overflow: hidden;
+      position: relative;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      z-index: 2;
+    }
+
+    .carousel-container {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      animation: slideInfinite 30s linear infinite;
+      width: fit-content;
+    }
+
+    .carousel-item {
+      flex-shrink: 0;
+      width: 200px;
+      height: 356px;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .story-image,
+    .story-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @keyframes slideInfinite {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-1928px); /* 9 items: (9 * 200px) + (8 * 20px gaps) */
+      }
+    }
+
+    /* Hero Stats */
+    .hero-stats {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .stat-number {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent-orange);
+      margin-bottom: 8px;
+    }
+
+    .stat-number small {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.7);
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .stat-comparison {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--gray-300);
+      opacity: 0.8;
+    }
+
+    /* ========================================
+       SECTIONS BASE STYLES
+    ======================================== */
+    .section {
+      padding: 120px 48px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(40px, 6vw, 84px);
+      font-weight: 300;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .section-subtitle {
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--gray-400);
+      max-width: 400px;
+      line-height: 1.7;
+      text-align: right;
+    }
+
+    /* ========================================
+       CAMPAIGN TIMELINE
+    ======================================== */
+    .campaign-timeline {
+      padding: 120px 48px;
+      background: var(--gray-900);
+    }
+
+    .timeline-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 80px;
+    }
+
+    .timeline-step {
+      background: var(--black);
+      border-radius: 16px;
+      padding: 40px 32px;
+      border: 1px solid var(--gray-800);
+      position: relative;
+      transition: transform 0.5s var(--ease-out-expo), border-color 0.5s var(--ease-out-expo);
+    }
+
+    .timeline-step:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary-green);
+    }
+
+    .timeline-step h3 {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 16px;
+      color: var(--primary-green);
+    }
+
+    .timeline-step p {
+      color: var(--gray-300);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .timeline-metrics {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .timeline-metric {
+      background: var(--gray-800);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .timeline-metric .value {
+      color: var(--accent-orange);
+    }
+
+    /* ========================================
+       PSYCHOLOGY CARDS
+    ======================================== */
+    .psychology-section {
+      padding: 120px 48px;
+    }
+
+    .psychology-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .psychology-card {
+      background: var(--gray-900);
+      border-radius: 16px;
+      padding: 32px 24px;
+      border: 1px solid var(--gray-800);
+      border-left: 4px solid var(--primary-green);
+      transition: all 0.5s var(--ease-out-expo);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .psychology-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary-green);
+      background: var(--black);
+    }
+
+    .psychology-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--primary-green);
+      transition: width 0.6s var(--ease-out-expo);
+    }
+
+    .psychology-card:hover::before {
+      width: 100%;
+    }
+
+    .psychology-card h4 {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .psychology-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--gray-400);
+    }
+
+    /* ========================================
+       RESULTS GRID
+    ======================================== */
+    .results-section {
+      padding: 120px 48px;
+      background: var(--gray-900);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-top: 80px;
+    }
+
+    .result-card {
+      background: var(--black);
+      border-radius: 16px;
+      padding: 40px;
+      border: 1px solid var(--gray-800);
+      position: relative;
+      transition: all 0.5s var(--ease-out-expo);
+    }
+
+    .result-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary-green);
+    }
+
+    .result-card h3 {
+      font-family: var(--font-heading);
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      color: var(--primary-green);
+    }
+
+    .performance-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .performance-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray-800);
+    }
+
+    .performance-item:last-child {
+      border-bottom: none;
+    }
+
+    .metric-name {
+      font-weight: 500;
+      color: var(--gray-300);
+    }
+
+    .metric-subtitle {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gray-500);
+      font-style: italic;
+    }
+
+    .metric-comparison {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+    }
+
+    .our-rate {
+      color: var(--accent-orange);
+      font-size: 18px;
+    }
+
+    .our-rate small {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gray-400);
+    }
+
+    .vs {
+      color: var(--gray-500);
+      font-size: 14px;
+    }
+
+    .industry-rate {
+      color: var(--gray-400);
+      font-size: 14px;
+    }
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+    @media (max-width: 1024px) {
+      .psychology-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline-steps { grid-template-columns: repeat(2, 1fr); }
+      .results-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 12px 16px; top: 12px; }
+      .nav-links { display: none; }
+      .nav-divider { display: none; }
+      .hero { padding: 0 24px; }
+      .hero-headline { font-size: 34px; }
+      .hero-stats { grid-template-columns: 1fr; gap: 20px; }
+      .story-carousel-fullwidth { margin: 24px 0 16px 0; }
+      @keyframes slideInfinite {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-1548px); /* Mobile: (9 * 160px) + (8 * 12px gaps) */
+        }
+      }
+      .carousel-item {
+        width: 160px;
+        height: 284px;
+      }
+      .carousel-track { gap: 12px; }
+      .section { padding: 80px 24px; }
+      .psychology-grid { grid-template-columns: 1fr; gap: 16px; }
+      .psychology-card { padding: 24px 20px; }
+      .timeline-steps { grid-template-columns: 1fr; }
+      .section-header { flex-direction: column; gap: 24px; }
+      .section-subtitle { text-align: left; }
+      .cursor-dot { display: none; }
+      .hero-giant-text { font-size: 100px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Grain overlay -->
+  <div class="grain"></div>
+
+  <!-- Custom cursor -->
+  <div class="cursor-dot"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-logo">
+      <span class="nav-logo-text">POAP Studio</span>
+    </div>
+    <span class="nav-divider"></span>
+    <div class="nav-links">
+      <a href="#campaign">Campaign</a>
+      <a href="#psychology">Psychology</a>
+      <a href="#results">Results</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-giant">
+      <div class="hero-giant-text">INSTAGRAM GAMIFIED</div>
+    </div>
+
+    <div class="hero-tag reveal delay-1">Case Study</div>
+
+    <h1 class="hero-headline">
+      <span class="reveal-line delay-2"><span>Instagram <em>Gamified</em></span></span><br>
+      <span class="reveal-line delay-3"><span>Campaign</span></span>
+    </h1>
+
+    <p class="hero-tag reveal delay-4" style="margin-top: 24px;">by POAP Studio</p>
+
+    <!-- Story Carousel - Full Width -->
+    <div class="story-carousel-fullwidth reveal delay-5">
+      <div class="carousel-container">
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <img src="hagamos-un-trato.png" alt="Hagamos un trato" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <img src="misiones-empiezan-pronto.png" alt="Las misiones empiezan muy pronto" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <img src="primera-reliquia.png" alt="Primera reliquia" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <img src="mision-esta-en-marcha.png" alt="La misión está en marcha" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <video src="reel_1_sobre.mp4" class="story-video" autoplay muted loop playsinline></video>
+          </div>
+          <div class="carousel-item">
+            <img src="mision-continua.png" alt="La misión continúa" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <video src="reel_2_botas.mp4" class="story-video" autoplay muted loop playsinline></video>
+          </div>
+          <div class="carousel-item">
+            <img src="ultimo-paso-viaje.png" alt="Último paso del viaje" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <img src="busqueda-llego-a-su-fin.png" alt="La búsqueda llegó a su fin" class="story-image">
+          </div>
+          <!-- Duplicate for infinite loop -->
+          <div class="carousel-item">
+            <img src="hagamos-un-trato.png" alt="Hagamos un trato" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <img src="misiones-empiezan-pronto.png" alt="Las misiones empiezan muy pronto" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <img src="primera-reliquia.png" alt="Primera reliquia" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <img src="mision-esta-en-marcha.png" alt="La misión está en marcha" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <video src="reel_1_sobre.mp4" class="story-video" autoplay muted loop playsinline></video>
+          </div>
+          <div class="carousel-item">
+            <img src="mision-continua.png" alt="La misión continúa" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <video src="reel_2_botas.mp4" class="story-video" autoplay muted loop playsinline></video>
+          </div>
+          <div class="carousel-item">
+            <img src="ultimo-paso-viaje.png" alt="Último paso del viaje" class="story-image">
+          </div>
+          <div class="carousel-item">
+            <img src="busqueda-llego-a-su-fin.png" alt="La búsqueda llegó a su fin" class="story-image">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Stats -->
+    <div class="hero-stats reveal delay-6">
+      <div class="stat">
+        <span class="stat-number">2.1%</span>
+        <span class="stat-label">Email Capture Rate</span>
+        <span class="stat-comparison">vs 0.1-0.5% industry</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">$2.27</span>
+        <span class="stat-label">Cost Per Email</span>
+        <span class="stat-comparison">vs $3-8 industry</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">6.2%</span>
+        <span class="stat-label">Engagement Rate</span>
+        <span class="stat-comparison">vs 1-3% industry</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Campaign Timeline -->
+  <section class="campaign-timeline" id="campaign">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title reveal">The campaign: A 7-day Instagram quest</h2>
+      </div>
+      <p class="section-subtitle reveal delay-2">How we turned a fictional character's lost items into a viral engagement engine</p>
+    </div>
+
+    <div class="duende-intro reveal delay-3" style="display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center; margin-bottom: 80px; max-width: 1000px; margin-left: auto; margin-right: auto;">
+      <div class="duende-image" style="position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1; background: var(--gray-800);">
+        <video class="duende-video" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover;">
+          <source src="duende-character.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="duende-story">
+        <h3 style="font-family: var(--font-heading); font-size: 32px; font-weight: 500; margin-bottom: 20px; color: var(--primary-green);">Meet the Duende</h3>
+        <p style="font-size: 16px; line-height: 1.7; color: var(--gray-300); margin-bottom: 16px;">A beloved fictional character with 370K followers who "lost" 3 essential items and needed his community's help to find them.</p>
+        <p style="font-size: 14px; font-weight: 600; color: var(--accent-orange); text-transform: uppercase; letter-spacing: 0.1em;">The 7-Day Journey: Each Item = Different Instagram Action</p>
+      </div>
+    </div>
+
+    <div class="timeline-steps">
+      <div class="timeline-step reveal delay-1">
+        <h3>Find the Hat (Sombrero)</h3>
+        <div style="display: flex; gap: 12px; margin-bottom: 20px; align-items: center;">
+          <span style="background: var(--primary-green); color: var(--black); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Day 1</span>
+          <span style="color: var(--accent-orange); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Story Reply</span>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <img src="primera-reliquia.png" alt="Primera Reliquia - Sombrero" style="width: 100%; border-radius: 12px; aspect-ratio: 16/9; object-fit: cover;">
+        </div>
+        <p><strong>The Story:</strong> "I lost my hat! If you see it, tell me the magic word..."</p>
+        <div class="timeline-metrics">
+          <div class="timeline-metric">Action: <span class="value">Reply to Story</span></div>
+          <div class="timeline-metric">Reward: <span class="value">Digital Collectible</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal delay-2">
+        <h3>Find the Envelope (Sobre)</h3>
+        <div style="display: flex; gap: 12px; margin-bottom: 20px; align-items: center;">
+          <span style="background: var(--primary-green); color: var(--black); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Day 3-4</span>
+          <span style="color: var(--accent-orange); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Reel Comment</span>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <video autoplay muted loop playsinline style="width: 100%; border-radius: 12px; aspect-ratio: 16/9; object-fit: cover;">
+            <source src="reel_1_sobre.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p><strong>The Story:</strong> "My important letter is missing! Only the code can unlock it..."</p>
+        <div class="timeline-metrics">
+          <div class="timeline-metric">Action: <span class="value">Comment on Reel</span></div>
+          <div class="timeline-metric">Reward: <span class="value">Envelope Collectible</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-step reveal delay-3">
+        <h3>Find the Boots (Botas)</h3>
+        <div style="display: flex; gap: 12px; margin-bottom: 20px; align-items: center;">
+          <span style="background: var(--primary-green); color: var(--black); padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">Day 5-7</span>
+          <span style="color: var(--accent-orange); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;">Story Share</span>
+        </div>
+        <div style="margin-bottom: 20px;">
+          <video autoplay muted loop playsinline style="width: 100%; border-radius: 12px; aspect-ratio: 16/9; object-fit: cover;">
+            <source src="reel_2_botas.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p><strong>The Story:</strong> "Without my boots, I can't complete my journey! Share to help me walk again..."</p>
+        <div class="timeline-metrics">
+          <div class="timeline-metric">Action: <span class="value">Share to Story</span></div>
+          <div class="timeline-metric">Reward: <span class="value">Complete Collection</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Collection Page -->
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title reveal">Your personal collection page</h2>
+      </div>
+      <p class="section-subtitle reveal delay-2">Each participant received a unique link to track their progress and showcase their collectibles</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start;">
+      <div class="reveal-left delay-3">
+        <div style="background: var(--gray-900); border-radius: 16px; padding: 40px; border: 1px solid var(--gray-800);">
+          <h4 style="font-family: var(--font-heading); font-size: 24px; font-weight: 500; margin-bottom: 20px; color: var(--primary-green);">Visual progress</h4>
+          <p style="color: var(--gray-300); line-height: 1.7; margin-bottom: 24px;">Users could see their collection grow in real-time, with each new item appearing as soon as they completed the required action.</p>
+          <div style="display: flex; gap: 16px;">
+            <img src="collectible-display.png" alt="Collection Display" style="width: 100%; border-radius: 12px;">
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal-right delay-4">
+        <div style="background: var(--gray-900); border-radius: 16px; padding: 40px; border: 1px solid var(--gray-800);">
+          <h4 style="font-family: var(--font-heading); font-size: 24px; font-weight: 500; margin-bottom: 20px; color: var(--primary-green);">Completion rewards and leaderboard</h4>
+          <p style="color: var(--gray-300); line-height: 1.7; margin-bottom: 24px;">Completing all three items unlocked exclusive rewards and recognition on the community leaderboard.</p>
+          <img src="rewards-leaderboard.png" alt="Rewards and Leaderboard" style="width: 100%; border-radius: 12px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Psychology Section -->
+  <section class="psychology-section" id="psychology">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title reveal">The psychology behind the campaign</h2>
+      </div>
+      <p class="section-subtitle reveal delay-2">Understanding the behavioral triggers that drove unprecedented engagement</p>
+    </div>
+
+    <div class="psychology-grid">
+      <div class="psychology-card reveal delay-1">
+        <h4>Progressive commitment</h4>
+        <p>Each action more "costly" than the last. Users who complete harder actions are more committed to the brand.</p>
+      </div>
+      <div class="psychology-card reveal delay-2">
+        <h4>Collection completion</h4>
+        <p>FOMO drives completion. Seeing 2/3 items collected creates strong urge to "finish the set."</p>
+      </div>
+      <div class="psychology-card reveal delay-3">
+        <h4>Native platform behavior</h4>
+        <p>Uses Instagram's natural actions (reply, comment, share) instead of forcing users to external websites.</p>
+      </div>
+      <div class="psychology-card reveal delay-4">
+        <h4>Narrative investment</h4>
+        <p>Users become emotionally invested in helping the character complete his journey.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Results Section -->
+  <section class="results-section" id="results">
+    <div class="section-header">
+      <div>
+        <h2 class="section-title reveal">Results that matter</h2>
+      </div>
+      <p class="section-subtitle reveal delay-2">Metrics that demonstrate the campaign's impact on engagement, conversion, and brand reach</p>
+    </div>
+
+    <div class="results-grid">
+      <div class="result-card reveal delay-1">
+        <h3>Cost efficiency</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+          <div style="text-align: center; padding: 20px; background: var(--gray-800); border-radius: 12px;">
+            <div style="font-size: 32px; font-weight: 700; color: var(--accent-orange); margin-bottom: 8px;">$2.27</div>
+            <div style="font-size: 14px; color: var(--gray-400);">Cost per email</div>
+          </div>
+          <div style="text-align: center; padding: 20px; background: var(--gray-800); border-radius: 12px;">
+            <div style="font-size: 32px; font-weight: 700; color: var(--accent-orange); margin-bottom: 8px;">4,400</div>
+            <div style="font-size: 14px; color: var(--gray-400);">Total emails</div>
+          </div>
+        </div>
+        <p style="color: var(--gray-300); font-size: 14px; text-align: center; font-weight: 600;">25-70% cheaper than industry average</p>
+      </div>
+
+      <div class="result-card reveal delay-2">
+        <h3>Performance vs Industry</h3>
+        <div class="performance-metrics">
+          <div class="performance-item">
+            <div>
+              <span class="metric-name">Email Capture Rate</span>
+            </div>
+            <div class="metric-comparison">
+              <span class="our-rate"><small>up to</small> 2.1%</span>
+              <span class="vs">vs</span>
+              <span class="industry-rate">0.1-0.5%</span>
+            </div>
+          </div>
+          <div class="performance-item">
+            <div>
+              <span class="metric-name">Engagement Rate</span>
+              <span class="metric-subtitle">(interactions / views)</span>
+            </div>
+            <div class="metric-comparison">
+              <span class="our-rate">6.2%</span>
+              <span class="vs">vs</span>
+              <span class="industry-rate">1-3%</span>
+            </div>
+          </div>
+          <div class="performance-item">
+            <div>
+              <span class="metric-name">Story Increase View</span>
+            </div>
+            <div class="metric-comparison">
+              <span class="our-rate">+117%</span>
+              <span class="vs"></span>
+              <span class="industry-rate"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="result-card reveal delay-3">
+        <h3>Lead quality segmentation</h3>
+        <div style="margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <span style="color: var(--gray-300);">High-intent leads (3/3 items)</span>
+            <span style="color: var(--accent-orange); font-weight: 600;">67%</span>
+          </div>
+          <div style="width: 100%; background: var(--gray-800); border-radius: 4px; overflow: hidden;">
+            <div style="width: 67%; height: 8px; background: var(--primary-green);"></div>
+          </div>
+        </div>
+        <div style="margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <span style="color: var(--gray-300);">Medium-intent leads (2/3 items)</span>
+            <span style="color: var(--accent-orange); font-weight: 600;">23%</span>
+          </div>
+          <div style="width: 100%; background: var(--gray-800); border-radius: 4px; overflow: hidden;">
+            <div style="width: 23%; height: 8px; background: var(--light-green);"></div>
+          </div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <span style="color: var(--gray-300);">Low-intent leads (1/3 items)</span>
+            <span style="color: var(--accent-orange); font-weight: 600;">10%</span>
+          </div>
+          <div style="width: 100%; background: var(--gray-800); border-radius: 4px; overflow: hidden;">
+            <div style="width: 10%; height: 8px; background: var(--gray-600);"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="border-top: 1px solid var(--gray-800); padding: 48px; text-align: center;">
+    <div style="display: flex; justify-content: center; gap: 48px; margin-bottom: 32px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 12px; color: var(--gray-600);">Case Study</span>
+        <span style="font-size: 13px; font-weight: 600; color: var(--gray-300);">Instagram Gamified Campaign</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 12px; color: var(--gray-600);">Agency</span>
+        <span style="font-size: 13px; font-weight: 600; color: var(--gray-300);">POAP Studio</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 12px; color: var(--gray-600);">Year</span>
+        <span style="font-size: 13px; font-weight: 600; color: var(--gray-300);">2024</span>
+      </div>
+    </div>
+    <div style="font-family: var(--font-heading); font-size: clamp(60px, 12vw, 180px); font-weight: 600; letter-spacing: -0.04em; color: var(--white); opacity: 0.07; margin: 0 -48px;">DUENDE.BA</div>
+  </footer>
+
+  <script>
+    /* ========================================
+       CUSTOM CURSOR
+    ======================================== */
+    const cursor = document.querySelector('.cursor-dot');
+    let cursorX = 0, cursorY = 0, actualX = 0, actualY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      cursorX = e.clientX - 4;
+      cursorY = e.clientY - 4;
+    });
+
+    function animateCursor() {
+      actualX += (cursorX - actualX) * 0.15;
+      actualY += (cursorY - actualY) * 0.15;
+      cursor.style.transform = `translate(${actualX}px, ${actualY}px)`;
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover effect on interactive elements
+    const hoverTargets = document.querySelectorAll('a, button, .psychology-card, .result-card, .timeline-step');
+    hoverTargets.forEach(el => {
+      el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
+
+    /* ========================================
+       SCROLL REVEAL
+    ======================================== */
+    const observerOptions = {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal, .reveal-line, .reveal-scale, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    /* ========================================
+       DIVIDER ANIMATION
+    ======================================== */
+    const dividers = document.querySelectorAll('.divider');
+    const dividerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          dividerObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    dividers.forEach(el => dividerObserver.observe(el));
+
+    /* ========================================
+       VIDEO OPTIMIZATION
+    ======================================== */
+    document.querySelectorAll('.story-video').forEach(video => {
+      video.setAttribute('preload', 'metadata');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.play().catch(e => {
+              console.log('Video autoplay failed:', e);
+            });
+          } else {
+            entry.target.pause();
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(video);
+    });
+  </script>
+</body>
+</html>
