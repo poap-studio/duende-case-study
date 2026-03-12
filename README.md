@@ -166,4 +166,4 @@ La página está **production-ready**. Solo necesita:
 3. **Images** reales de la collection page
 4. **Analytics** tracking setup
 
-**Estimated deploy time:** 15 minutos con Coder 🔥
+**Estimated deploy time:** 15 minutos con Coder 🔥# Deploy test
