@@ -144,21 +144,17 @@ function initSmoothScrolling() {
 // Add CSS classes for animations
 const style = document.createElement('style');
 style.textContent = `
-    .funnel-card, .result-card, .stat, .problem-box, .comparison-chart {
+    .funnel-card, .result-card, .problem-box, .comparison-chart {
         opacity: 0;
         transform: translateY(30px);
         transition: all 0.6s ease;
     }
     
-    .funnel-card.animate-in, .result-card.animate-in, .stat.animate-in, 
+    .funnel-card.animate-in, .result-card.animate-in, 
     .problem-box.animate-in, .comparison-chart.animate-in {
         opacity: 1;
         transform: translateY(0);
     }
-    
-    .stat:nth-child(1).animate-in { transition-delay: 0s; }
-    .stat:nth-child(2).animate-in { transition-delay: 0.1s; }
-    .stat:nth-child(3).animate-in { transition-delay: 0.2s; }
     
     .funnel-card:nth-child(1).animate-in { transition-delay: 0s; }
     .funnel-card:nth-child(2).animate-in { transition-delay: 0.1s; }
