@@ -311,7 +311,8 @@
        DUENDE VIDEO
     ======================================== */
     .duende-video {
-      border-radius: 16px !important;
+      border-radius: 0 !important;
+      /* Video transparente - no necesita border radius */
     }
 
     /* ========================================
@@ -1122,6 +1123,7 @@
     <div class="duende-intro reveal delay-3" style="display: grid; grid-template-columns: 1fr 2fr; gap: 60px; align-items: center; margin-bottom: 80px; max-width: 1000px; margin-left: auto; margin-right: auto;">
       <div class="duende-image" style="position: relative; aspect-ratio: 3/4; background: transparent;">
         <video class="duende-video" autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: contain;">
+          <source src="duende-transparent.webm" type="video/webm">
           <source src="duende-character.mp4" type="video/mp4">
         </video>
       </div>
@@ -1218,6 +1220,7 @@
       <div class="collection-card reveal delay-5">
         <div style="margin-bottom: 20px; border-radius: 12px; overflow: hidden;">
           <video class="duende-video" autoplay muted loop playsinline style="width: 100%; display: block;">
+            <source src="duende-transparent.webm" type="video/webm">
             <source src="duende-character.mp4" type="video/mp4">
           </video>
         </div>
