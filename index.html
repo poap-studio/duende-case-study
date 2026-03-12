@@ -318,10 +318,11 @@
        STORY CAROUSEL - Full Width
     ======================================== */
     .story-carousel-fullwidth {
-      margin: 48px -48px 24px -48px;
+      margin: 48px 0 24px 0;
       overflow: hidden;
       position: relative;
-      width: calc(100% + 96px);
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
       z-index: 2;
     }
 
@@ -335,7 +336,6 @@
       gap: 20px;
       animation: slideInfinite 30s linear infinite;
       width: fit-content;
-      padding-right: 100px;
     }
 
     .carousel-item {
@@ -352,7 +352,7 @@
     .story-video {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       display: block;
     }
 
@@ -683,7 +683,7 @@
       .hero { padding: 0 24px; }
       .hero-headline { font-size: 27px; }
       .hero-stats { grid-template-columns: 1fr; gap: 20px; }
-      .story-carousel-fullwidth { margin: 24px -24px 16px -24px; width: calc(100% + 48px); }
+      .story-carousel-fullwidth { margin: 24px 0 16px 0; }
       @keyframes slideInfinite {
         from {
           transform: translateX(0);
